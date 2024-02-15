@@ -6,13 +6,23 @@ import Button from "./Button"
 const Navbar = () => {
   return (
     <nav className="flexBetween max-container padding-container relative z-30 py-5">
-      <Link href="/">
-        <Image src="/AutoLogo.svg" alt="logo" width={150} height={60} />
+      <span className="hidden lg:flex">
+      <Link href="/" >
+        <Image src="/AutoLogo.png" alt="logo" width={300} height={75} />
       </Link>
+      </span>
+      <div className="flexCenter lg:hidden">
+        <Button 
+          type="button"
+          title="Login"
+          icon="/Slogo.png"
+          variant="btn_ablue"
+        />
+      </div>
 
       <ul className="hidden h-full gap-12 lg:flex">
         {NAV_LINKS.map((link) => (
-          <Link href={link.href} key={link.key} className="regular-16 text-gray-50 flexCenter cursor-pointer pb-1.5 transition-all hover:font-bold">
+          <Link href={link.href} key={link.key} className="regular-16 text-ayellow flexCenter cursor-pointer pb-1.5 transition-all hover:font-bold">
             {link.label}
           </Link>
         ))}
@@ -23,7 +33,7 @@ const Navbar = () => {
           type="button"
           title="Login"
           icon="/user.svg"
-          variant="btn_dark_green"
+          variant="btn_ablue"
         />
       </div>
 

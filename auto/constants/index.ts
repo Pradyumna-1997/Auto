@@ -1,7 +1,7 @@
 // NAVIGATION
 export const NAV_LINKS = [
-    { href: '/', key: 'home', label: 'Home' },
-    { href: '/', key: 'how_Automovill_work', label: 'How Automovill Work?' },
+    { href: '/', key: 'Home', label: 'Home' },
+    { href: '/', key: 'How_Automovill_work', label: 'How Automovill Work?' },
     { href: '/', key: 'services', label: 'Services' },
     { href: '/', key: 'pricing ', label: 'Pricing ' },
     { href: '/', key: 'contact_us', label: 'Contact Us' },
@@ -48,29 +48,42 @@ export const NAV_LINKS = [
   ];
   
   // FOOTER SECTION
+  export const FOOTER_LINKS1 = [
+    { href: '/1', key: 'Anout_us', label: 'About US' },
+    { href: '/', key: 'Blogs', label: 'Blogs' },
+    { href: '/', key: 'Insurance', label: 'Services' },
+    { href: '/', key: 'Coupon', label: 'Coupon' },
+    { href: '/', key: 'Warranty', label: 'Warranty' },
+  ];
+  export const FOOTER_LINKS2 = [
+    { href: '/1', key: 'General Service', label: 'General Service' },
+    { href: '/', key: 'Denting and Painting', label: 'Denting and Painting' },
+    { href: '/', key: 'General Health Checkup/Others', label: 'General Health Checkup/Others' },
+    { href: '/', key: 'AC and Electrical Repair', label: 'AC and Electrical Repair' },
+    { href: '/', key: 'Others', label: 'Others' },
+  ];
   export const FOOTER_LINKS = [
     {
       title: 'Learn More',
       links: [
-        'About Hilink',
-        'Press Releases',
-        'Environment',
-        'Jobs',
-        'Privacy Policy',
-        'Contact Us',
+        'About Us',
+        'Blogs',
+        'Insurance',
+        'Coupon',
+        'Warranty',
       ],
     },
     {
-      title: 'Our Community',
-      links: ['Climbing xixixi', 'Hiking hilink', 'Hilink kinthill'],
+      title: 'Services',
+      links: ['General Service', 'Denting and Painting', 'General Health Checkup/Others','AC and Electrical Repair','Others'],
     },
   ];
   
   export const FOOTER_CONTACT_INFO = {
     title: 'Contact Us',
     links: [
-      { label: 'Admin Officer', value: '123-456-7890' },
-      { label: 'Email Officer', value: 'hilink@akinthil.com' },
+      { label: 'Customer Care', value: '+91 7353 600 400' },
+      { label: 'Email Address', value: 'info@automovill.com' },
     ],
   };
   

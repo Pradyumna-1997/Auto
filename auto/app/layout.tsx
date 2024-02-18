@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 
 
 
+
 export const metadata: Metadata = {
   title: "Automoville- One stop Solution for Car services",
   description: "One stop Solution for Car services",

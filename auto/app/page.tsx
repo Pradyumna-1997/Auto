@@ -1,5 +1,8 @@
+
 import GetApp from "@/components/GetApp";
 import Hero from "@/components/Hero";
+import Services from "@/components/Services";
+
 
 
 export default function Home() {
@@ -7,6 +10,7 @@ export default function Home() {
     <h1 className= "font-bold text-ablue text-2xl">
       <Hero />
       <GetApp />
+      <Services/>
     </h1>
   );
 }

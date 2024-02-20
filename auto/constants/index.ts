@@ -38,11 +38,11 @@ export const NAV_LINKS = [
     { href: '/', key: 'Warranty', label: 'Warranty' },
   ];
   export const FOOTER_LINKS2 = [
-    { href: '/1', key: 'General Service', label: 'General Service' },
-    { href: '/', key: 'Denting and Painting', label: 'Denting and Painting' },
-    { href: '/', key: 'General Health Checkup/Others', label: 'General Health Checkup/Others' },
-    { href: '/', key: 'AC and Electrical Repair', label: 'AC and Electrical Repair' },
-    { href: '/', key: 'Others', label: 'Others' },
+    { href: '/Services', key: 'General Service', label: 'General Service' },
+    { href: '/Services', key: 'Denting and Painting', label: 'Denting and Painting' },
+    { href: '/Services', key: 'General Health Checkup/Others', label: 'General Health Checkup/Others' },
+    { href: '/Services', key: 'AC and Electrical Repair', label: 'AC and Electrical Repair' },
+    { href: '/Services', key: 'Others', label: 'Others' },
   ];
   export const FOOTER_LINKS = [
     {

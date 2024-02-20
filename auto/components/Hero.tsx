@@ -15,7 +15,7 @@ const Hero = () => {
       <TopAd />
 
       <div className=" flex flex-1">
-        <div className="relative z-20 flex w-[500px] flex-col gap-8 rounded-3xl bg-ablue px-7 ">
+        <div className="relative z-20 flex w-[500px] flex-col gap-8 rounded-3xl bg-ablue px-7 py-5">
             <div className="flex flex-col">
                 <div className="flexBetween">
                     <p className="bold-20 text-white">Name</p>

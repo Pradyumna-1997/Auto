@@ -8,7 +8,7 @@ const GetApp = () => {
       <div className="get-app">
         <div className="z-20 flex w-full flex-1 flex-col items-start justify-center gap-12">
           <h2 className="bold-40 lg:bold-64 xl:max-w-[320px]">Get App Now!</h2>
-          <p className="bold-16 text-gray-10">Available on iOS and Android</p>
+          <p className="bold-16 text-gray-10">Available on Android</p>
           <div className="flex w-full flex-col gap-3 whitespace-nowrap xl:flex-row">
             <Button 
               type="button"

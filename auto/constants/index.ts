@@ -31,7 +31,7 @@ export const NAV_LINKS = [
   
   // FOOTER SECTION
   export const FOOTER_LINKS1 = [
-    { href: '/1', key: 'About_us', label: 'About US' },
+    { href: '/', key: 'About_us', label: 'About US' },
     { href: '/', key: 'Blogs', label: 'Blogs' },
     { href: '/', key: 'Insurance', label: 'Services' },
     { href: '/', key: 'Coupon', label: 'Coupon' },

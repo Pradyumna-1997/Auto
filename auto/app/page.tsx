@@ -1,4 +1,5 @@
 
+import End from "@/components/End";
 import GetApp from "@/components/GetApp";
 import Hero from "@/components/Hero";
 import Services from "@/components/Services";
@@ -9,6 +10,7 @@ export default function Home() {
       <Hero />
       <GetApp />
       <Services/>
+      <End />
     </h1>
   );
 }

@@ -15,7 +15,6 @@ function TopAd2() {
     {
       src: '/TopAd3.png',alt: 'TopAd3',href: '/Services'
     },
-
     {
       src: '/TopAd4.png',alt: 'TopAd4',href: '/Services'
     },
@@ -37,10 +36,10 @@ function TopAd2() {
   return (
     <div className='max-w-[1400px] h-[200px] flex-column w-full m-auto relative group'>
       <Link href={slides[currentIndex].href} key={slides[currentIndex].alt}>
-      <div
-        style={{ backgroundImage: `url(${slides[currentIndex].src})`, backgroundRepeat: "no-repeat" }}
-        className='w-full h-full rounded-2xl bg-center bg-contain duration-500'
-      ></div>
+        <div
+          style={{ backgroundImage: `url(${slides[currentIndex].src})`, backgroundRepeat: "no-repeat"}}
+          className='w-full h-full rounded-2xl bg-center bg-[length:330px_200px] duration-500'
+        ></div>
       </Link>
       {/* Left Arrow */}
       {/* <div className='hidden group-hover:block absolute top-[40%] -translate-x-0 translate-y-[-50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>

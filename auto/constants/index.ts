@@ -2,15 +2,9 @@
 export const NAV_LINKS = [
     { href: '/', key: 'Home', label: 'Home' },
     { href: '/', key: 'How_Automovill_work', label: 'How Automovill Work?' },
-    { href: '/', key: 'services', label: 'Services' },
-    { href: '/', key: 'pricing ', label: 'Pricing ' },
-    { href: '/', key: 'contact_us', label: 'Contact Us' },
-  ];
-  
-  // Top Ads
-  export const TOP_ADS = [
-    {href:'/' ,image:'/facebook.svg', alt:'Tad1', key: 'Tad1'},
-    {href:'/' ,image:'/youtube.svg', alt:'Tad2', key: 'Tad2'},
+    { href: '/', key: 'Services', label: 'Services' },
+    { href: '/', key: 'Pricing', label: 'Pricing' },
+    { href: '/', key: 'Contact_us', label: 'Contact Us' },
   ];
   
   // FEATURES SECTION
@@ -18,20 +12,18 @@ export const NAV_LINKS = [
     {
       title: 'Standerd Sevices',
       variant: 'green',
-      description:
-        'We provide a Standard Sevices',
+      description: 'We provide a Standard Sevices',
     },
     {
       title: 'Comprehensive Services',
       variant: 'green',
-      description:
-        "All above with more feautres such as ...",
+      description: 'All above with more feautres such as ...',
     },
   ];
   
   // FOOTER SECTION
   export const FOOTER_LINKS1 = [
-    { href: '/', key: 'About_us', label: 'About US' },
+    { href: '/', key: 'About_us', label: 'About Us' },
     { href: '/', key: 'Blogs', label: 'Blogs' },
     { href: '/', key: 'Insurance', label: 'Services' },
     { href: '/', key: 'Coupon', label: 'Coupon' },
@@ -45,20 +37,10 @@ export const NAV_LINKS = [
     { href: '/Services', key: 'Others', label: 'Others' },
   ];
   export const FOOTER_LINKS = [
-    {
-      title: 'Learn More',
-      links: [
-        'About Us',
-        'Blogs',
-        'Insurance',
-        'Coupon',
-        'Warranty',
-      ],
-    },
-    {
-      title: 'Services',
-      links: ['General Service', 'Denting and Painting', 'General Health Checkup/Others','AC and Electrical Repair','Others'],
-    },
+    {src: '/Flink1.png', href: '/Services', key: 'Flink1'},
+    {src: '/Flink2.png', href: '/Services', key: 'Flink2'},
+    {src: '/Flink3.png', href: '/', key: 'Flink3'},
+
   ];
   
   export const FOOTER_CONTACT_INFO = {

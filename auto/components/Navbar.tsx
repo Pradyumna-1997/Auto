@@ -1,51 +1,43 @@
-import { NAV_LINKS } from "@/constants"
-import Image from "next/image"
-import Link from "next/link"
-import Button from "./Button"
+'use client';
 
-const Navbar = () => {
+import React, { useState } from "react";
+
+import "./Navbar.css";
+import Link from "next/link";
+import Hamburger from "hamburger-react";
+import Button from "./Button";
+
+
+ const Navbar = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
-    <nav className="flexBetween max-container padding-container relative z-30 py-5">
-      <span className="hidden lg:flex">
-      <Link href="/" >
-        <Image src="/AutoLogo.png" alt="logo" width={300} height={75} />
-      </Link>
-      </span>
-      <div className="flexCenter lg:hidden">
-        <Button 
-          type="button"
-          title="Login"
-          icon="/Slogo.png"
-          variant="btn_ablue"
-        />
+    <nav className="flex max-container padding-container sticky top-0 z-30 py-2 bg-ablue">
+      <div className="right-0 lg:hidden">
+          <Button 
+            type="button"
+            title="Login"
+            icon="/Slogo.png"
+            variant="btn_ablue"
+          />
+        </div>
+      
+      <div className="menu px-16" onClick={() => setMenuOpen(!menuOpen)}>
+        <Hamburger  size={100}/>
       </div>
-
-      <ul className="hidden h-full gap-12 lg:flex">
-        {NAV_LINKS.map((link) => (
-          <Link href={link.href} key={link.key} className="regular-16 text-ayellow flexCenter cursor-pointer pb-1.5 transition-all hover:font-bold">
-            {link.label}
-          </Link>
-        ))}
+      <ul className={menuOpen ? "open" : ""}>
+        <li>
+          <Link href="/About">About</Link>
+        </li>
+        <li>
+          <Link href="/Services">Services</Link>
+        </li>
+        <li>
+          <Link href="/Contact">Contact</Link>
+        </li>
       </ul>
-
-      <div className="lg:flexCenter hidden">
-        <Button 
-          type="button"
-          title="Login"
-          icon="/user.svg"
-          variant="btn_ablue"
-        />
-      </div>
-
-      <Image 
-        src="menu.svg"
-        alt="menu"
-        width={32}
-        height={32}
-        className="inline-block cursor-pointer lg:hidden"
-      />
     </nav>
-  )
-}
+  );
+};
 
 export default Navbar

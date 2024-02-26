@@ -27,14 +27,14 @@ import Button from "./Button";
       </div>
       <ul className={menuOpen ? "open" : ""}>
         <li>
-          <Link href="/About">About</Link>
+          <Link href="/">Home</Link>
         </li>
         <li>
           <Link href="/Services">Services</Link>
         </li>
-        <li>
+        {/* <li>
           <Link href="/Contact">Contact</Link>
-        </li>
+        </li> */}
       </ul>
     </nav>
   );

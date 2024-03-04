@@ -38,7 +38,7 @@ function TopAd2() {
       <Link href={slides[currentIndex].href} key={slides[currentIndex].alt}>
         <div
           style={{ backgroundImage: `url(${slides[currentIndex].src})`, backgroundRepeat: "no-repeat"}}
-          className='w-full h-full rounded-2xl bg-center bg-[length:330px_200px] duration-500'
+          className='w-full h-full rounded-2xl bg-center bg-[length:100%_100%] duration-500'
         ></div>
       </Link>
       {/* Left Arrow */}

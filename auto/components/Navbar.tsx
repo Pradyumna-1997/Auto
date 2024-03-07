@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 
 import "./Navbar.css";
@@ -10,7 +9,7 @@ import Hamburger from "hamburger-react";
 
 
 
-import { ConfigProvider, Select } from "antd";
+import {  Select } from "antd";
 
 
  const Navbar = () => {
@@ -18,7 +17,7 @@ import { ConfigProvider, Select } from "antd";
   const [menuOpen, setMenuOpen] = useState(false);
   const handleChange = (value: string) => {
     console.log(`selected ${value}`);
-    loc== ('${value}')
+    loc='${value}'
   };
   const Locations = [
     'Bang','Mum'
@@ -36,16 +35,6 @@ import { ConfigProvider, Select } from "antd";
           />
         </div> */}
         <div className="left-0">
-        <ConfigProvider
-  theme={{
-    components: {
-      Select: {
-        /* here is your component tokens */
-      },
-    },
-  }}
->
-
         <Select
       defaultValue="Select Location"
       style={{ width: 120 }}
@@ -58,7 +47,7 @@ import { ConfigProvider, Select } from "antd";
       ]}
       
     />
-    </ConfigProvider>
+    
         </div>
       
       <div className="menu px-16" onClick={() => setMenuOpen(!menuOpen)}>

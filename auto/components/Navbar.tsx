@@ -17,7 +17,6 @@ import {  Select } from "antd";
   const [menuOpen, setMenuOpen] = useState(false);
   const handleChange = (value: string) => {
     console.log(`selected ${value}`);
-    loc='${value}'
   };
   const Locations = [
     'Bang','Mum'
@@ -34,7 +33,7 @@ import {  Select } from "antd";
             variant="btn_ablue"
           />
         </div> */}
-        <div className="left-0">
+        <div className="right-0 lg:hidden">
         <Select
       defaultValue="Select Location"
       style={{ width: 120 }}

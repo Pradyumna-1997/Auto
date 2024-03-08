@@ -10,14 +10,14 @@ export const NAV_LINKS = [
   // FEATURES SECTION
   export const SERVICES = [
     {
-      title: 'Standerd Sevices',
+      title: 'Standard Sevices',
       variant: 'green',
       description: 'We provide a Standard Sevices',
     },
     {
       title: 'Comprehensive Services',
       variant: 'green',
-      description: 'All above with more feautres such as ...',
+      description: 'All above with more features such as ...',
     },
   ];
   

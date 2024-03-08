@@ -31,14 +31,14 @@ const CarSel = () => {
            <h1 className= "font-bold text-ablue text-2xl">Select Brand and Car Model Here</h1>
            <div className="flex w-full flex-row">
       <Select
-        defaultValue="Select Brand here"
+        //defaultValue="Select Brand here"
         style={{ width: 180 }}
         onChange={handleProvinceChange}
         options={provinceData.map((province) => ({ label: province, value: province }))}
       />
       <Select
         style={{ width: 180 }}
-        defaultValue="Select Model here"
+        //defaultValue="Select Model here"
         onChange={onSecondCityChange}
         options={cities.map((city) => ({ label: city, value: city }))}
       />

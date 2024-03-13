@@ -2,10 +2,10 @@
 import Services from "@/components/Services";
 import React from 'react';
 import CarSel from "./CarSel";
+import Serviceprice from "./Serviceprice";
 
 
-
-export default function ServicesTab() {
+export default function ServicesTab () {
   
     return (
       

@@ -1,53 +1,99 @@
 'use client';
 
-import React, { useState } from 'react';
-import { Select, Space } from 'antd';
+import React, { useState, useEffect } from 'react';
+import { Button, Col, Image, Row, notification } from 'antd';
 
+interface DataItem {
+  id: number;
+  name: string;
+  // Add any other attributes you expect in the response
+}
 
+const Serviceprice: React.FC = () => {
+  const [ids, setIds] = useState<number[]>([]);
+  const [data, setData] = useState<DataItem[]>([]);
 
-const BrandData = ["Maruti", "BMW"];
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}core/getAllMake`);
+        const fetchedData: DataItem[] = await response.json();
 
+        setData(fetchedData);
+        const extractedIds = fetchedData.map((item) => item.id);
+        setIds(extractedIds);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
 
-const modelData = {
-  Maruti: ['800', 'A star', 'Alto'],
-  BMW: ['1 Series', '220 Sport', '3Series'],
-};
+    fetchData();
+  }, []);
 
-type modelName = keyof typeof modelData;
-
-const CarSel = () => {
-  const [Brands, setBrands] = useState(modelData[BrandData[0] as modelName]);
-  const [Secondmodel, setmodel] = useState(modelData[BrandData[0] as modelName][0]);
-
-  const handleBrandChange = (value: modelName) => {
-    setBrands(modelData[value]);
-    setmodel(modelData[value][0]);
-  };
-
-  const onmodelChange = (value: modelName) => {
-    setmodel(value);
+  const handleShowIds = () => {
+    notification.info({
+      message: 'IDs',
+      description: (
+        // <div>
+        //   <ul className="list-style: none flex-row">
+        //   {data.map((item, index) => (
+        //     <li>
+        //     <div key={index} 
+        //     style={{ width: '20%', height: '20%' } }
+        //     >
+        //       <Image src={`https://s3.ap-south-1.amazonaws.com/prodimages.automovill.com/MAKE_MODEL/MAKE/${item.id}.jpeg`} 
+        //       alt={`Image ${item.id}`}              
+        //       //onClick={() => handleImageClick(item.id)} 
+        //     />
+        //     </div>
+        //     </li>
+            
+        //   ))}
+        //   </ul>
+        // </div>
+        <div>
+        <Row gutter={[16, 16]} justify="start">
+        {data.map((item, index) => (
+          <div key={index} 
+          style={{ width: '20%', height: '20%' } }
+          >
+            <Col key={index} xs={24} sm={12} md={8} lg={6} xl={4}>
+            <Image src={`https://s3.ap-south-1.amazonaws.com/prodimages.automovill.com/MAKE_MODEL/MAKE/${item.id}.jpeg`} 
+            alt={`Image ${item.id}`}              
+            //onClick={() => handleImageClick(item.id)} 
+          />
+        </Col>
+            
+          </div>
+          
+          
+        ))}
+      </Row>
+      </div>
+   
+        
+        
+        
+      ),
+      duration: 0, // Keep the notification open until manually closed
+    });
   };
 
   return (
- 
-    <Space wrap>
-           <h1 className= "font-bold text-ablue text-2xl">Select Brand and Car Model Here</h1>
-           <div className="flex w-full flex-row">
-      <Select
-        //defaultValue="Select Brand here"
-        style={{ width: 180 }}
-        onChange={handleBrandChange}
-        options={BrandData.map((Brand) => ({ label: Brand, value: Brand }))}
-      />
-      <Select
-        style={{ width: 180 }}
-        //defaultValue="Select Model here"
-        onChange={onmodelChange}
-        options={Brands.map((model) => ({ label: model, value: model }))}
-      />
-      </div>
-    </Space>
+    <div className="sticky top-20">
+    {/* <Button type="primary" onClick={handleShowIds}> */}
+    <Button
+        onClick={handleShowIds}
+        style={{
+          width: '100%',
+          display: 'flex',
+          justifyContent: 'center',
+        }}
+      >
+       Click here to Select Car to be Serviced
+      </Button>
+  </div>
   );
 };
 
-export default CarSel;
+export default Serviceprice;

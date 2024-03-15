@@ -15,7 +15,7 @@ const Services = () => {
             {SERVICES.map((services) => (
               <FeatureItem 
                 key={services.title}
-                title={services.title} 
+                title={services.title}  
                 description={services.description}
               />
             ))}

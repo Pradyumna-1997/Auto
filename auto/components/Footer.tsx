@@ -4,7 +4,7 @@ import Link from "next/link"
 
 const Footer = () => {
     return (
-        <div className=" sticky bottom-0 z-30 py-2 bg-ablue">
+        <div className="flex max-container padding-container bg-ablue px-2 sticky bottom-0 z-30 py-2 bg-ablue">
             <ul className=" flex w-full gap-[30%] px-[10%]">
             {FOOTER_LINKS.map((link) => (
                 <Link href={link.href} key={link.key}>

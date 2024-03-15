@@ -12,6 +12,7 @@ export default function ServicesTab () {
       
       <h1 className= "font-bold text-ablue text-2xl">
         <CarSel />
+        <Serviceprice />
         <Services/>
       </h1>
     );

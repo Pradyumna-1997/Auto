@@ -3,7 +3,14 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Col, Image, Row, notification } from 'antd';
 
-interface DataItem {
+import axios from "axios";
+
+interface MakeItem {
+  id: number;
+  name: string;
+  // Add any other attributes you expect in the response
+}
+interface ModelItem {
   id: number;
   name: string;
   // Add any other attributes you expect in the response
@@ -11,69 +18,102 @@ interface DataItem {
 
 const Serviceprice: React.FC = () => {
   const [ids, setIds] = useState<number[]>([]);
-  const [data, setData] = useState<DataItem[]>([]);
+  const [data, setData] = useState<MakeItem[]>([]);
+  const [models, setModel] = useState<ModelItem[]>([]);
+  
+  const [selectedId, setSelectedId] = useState<number | null>(1);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchMake = async () => {
       try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}core/getAllMake`);
-        const fetchedData: DataItem[] = await response.json();
+        const fetchedData: ModelItem[] = await response.json();
+        
 
         setData(fetchedData);
         const extractedIds = fetchedData.map((item) => item.id);
         setIds(extractedIds);
+
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
 
-    fetchData();
+    fetchMake();
+
   }, []);
+
+  const closeAllNotifications = () => {
+    notification.destroy(); // Close all notifications
+  };
+
+  
+  const handleMakeClick = async (id2: number) => {
+    closeAllNotifications;
+    setSelectedId(id2);
+    console.log('Seleted brand ID',id2)
+
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}core/getModel?makeId=${id2}`);
+      const fetchedData: MakeItem[] = await response.json();
+
+      setModel(fetchedData);
+    } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+
+    notification.info({
+      message: `Brand number ${id2} clicked`,
+      description: (
+        <div>
+        <Row gutter={[16, 16]} justify="start">
+        {models.map((item, index) => (
+          <div key={index} 
+          //style={{ height: '20%' } }
+          >
+            <Col key={index} 
+            //xs={3} sm={3} md={3} lg={3} xl={3}
+            >
+              {item.name}        
+        </Col>
+          </div>
+        ))}
+      </Row>
+      </div>),
+      // <ul>
+      // {models.map((item, index) => (
+      //   <li key={index}>{item.name}</li>
+      // ))}
+      // </ul>),
+      duration: 3, // Automatically close the notification after 3 seconds
+    });
+  };
+ 
+  
 
   const handleShowIds = () => {
     notification.info({
-      message: 'IDs',
+      message: 'Select Your Brand',
       description: (
-        // <div>
-        //   <ul className="list-style: none flex-row">
-        //   {data.map((item, index) => (
-        //     <li>
-        //     <div key={index} 
-        //     style={{ width: '20%', height: '20%' } }
-        //     >
-        //       <Image src={`https://s3.ap-south-1.amazonaws.com/prodimages.automovill.com/MAKE_MODEL/MAKE/${item.id}.jpeg`} 
-        //       alt={`Image ${item.id}`}              
-        //       //onClick={() => handleImageClick(item.id)} 
-        //     />
-        //     </div>
-        //     </li>
-            
-        //   ))}
-        //   </ul>
-        // </div>
         <div>
         <Row gutter={[16, 16]} justify="start">
         {data.map((item, index) => (
           <div key={index} 
           style={{ width: '20%', height: '20%' } }
           >
-            <Col key={index} xs={24} sm={12} md={8} lg={6} xl={4}>
-            <Image src={`https://s3.ap-south-1.amazonaws.com/prodimages.automovill.com/MAKE_MODEL/MAKE/${item.id}.jpeg`} 
+            <Col key={index} 
+            //</div>xs={24} sm={12} md={8} lg={6} xl={4}
+            >
+            <img src={`https://s3.ap-south-1.amazonaws.com/prodimages.automovill.com/MAKE_MODEL/MAKE/${item.id}.jpeg`} 
             alt={`Image ${item.id}`}              
-            //onClick={() => handleImageClick(item.id)} 
+            onClick={() => handleMakeClick(item.id)} 
+            //onClick={closeAllNotifications}
           />
         </Col>
-            
           </div>
-          
-          
         ))}
       </Row>
       </div>
-   
-        
-        
-        
       ),
       duration: 0, // Keep the notification open until manually closed
     });

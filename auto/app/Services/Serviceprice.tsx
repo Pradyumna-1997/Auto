@@ -19,15 +19,15 @@ interface ModelItem {
 const Serviceprice: React.FC = () => {
   const [ids, setIds] = useState<number[]>([]);
   const [data, setData] = useState<MakeItem[]>([]);
-  const [models, setModel] = useState<ModelItem[]>([]);
+  const [models, setModels] = useState<ModelItem[]>([]);
   
-  const [selectedId, setSelectedId] = useState<number | null>(1);
+  const [selectedId, setSelectedId] = useState<number | null>(null);
 
   useEffect(() => {
     const fetchMake = async () => {
       try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}core/getAllMake`);
-        const fetchedData: ModelItem[] = await response.json();
+        const fetchedData: MakeItem[] = await response.json();
         
 
         setData(fetchedData);
@@ -43,50 +43,40 @@ const Serviceprice: React.FC = () => {
 
   }, []);
 
-  const closeAllNotifications = () => {
-    notification.destroy(); // Close all notifications
+  const Makeclick2 = async (id:number)=>{
+    notification.open({
+      message: `Brand number ${id} clicked`,
+      description: (
+        
+          <ul>
+            {models.map((item, index) => (
+              <li key={index}>{item.name}</li>
+            ))}
+          </ul>
+          ),
+      duration: 3, // Automatically close the notification after 3 seconds
+    });
   };
-
   
   const handleMakeClick = async (id2: number) => {
-    closeAllNotifications;
-    setSelectedId(id2);
-    console.log('Seleted brand ID',id2)
-
+    notification.destroy();
+    
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}core/getModel?makeId=${id2}`);
-      const fetchedData: MakeItem[] = await response.json();
+      const response2 = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}core/getModel?makeId=${id2}`);
+      const fetchedData2: ModelItem[] = await response2.json();
 
-      setModel(fetchedData);
+      setModels(fetchedData2);
+
     } catch (error) {
         console.error('Error fetching data:', error);
       }
+      
+    setSelectedId(id2);
+    console.log('Seleted brand ID',id2)
 
-    notification.info({
-      message: `Brand number ${id2} clicked`,
-      description: (
-        <div>
-        <Row gutter={[16, 16]} justify="start">
-        {models.map((item, index) => (
-          <div key={index} 
-          //style={{ height: '20%' } }
-          >
-            <Col key={index} 
-            //xs={3} sm={3} md={3} lg={3} xl={3}
-            >
-              {item.name}        
-        </Col>
-          </div>
-        ))}
-      </Row>
-      </div>),
-      // <ul>
-      // {models.map((item, index) => (
-      //   <li key={index}>{item.name}</li>
-      // ))}
-      // </ul>),
-      duration: 3, // Automatically close the notification after 3 seconds
-    });
+    Makeclick2(id2)
+
+
   };
  
   
@@ -107,6 +97,7 @@ const Serviceprice: React.FC = () => {
             <img src={`https://s3.ap-south-1.amazonaws.com/prodimages.automovill.com/MAKE_MODEL/MAKE/${item.id}.jpeg`} 
             alt={`Image ${item.id}`}              
             onClick={() => handleMakeClick(item.id)} 
+            //onChange={() => handleMakeClick(item.id)}
             //onClick={closeAllNotifications}
           />
         </Col>

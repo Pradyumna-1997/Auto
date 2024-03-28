@@ -1,26 +1,55 @@
 'use client';
 
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from 'react';
 
 import "./Navbar.css";
 import Link from "next/link";
 import Hamburger from "hamburger-react";
 
-
-
 import {  Select } from "antd";
+const { Option } = Select;
 
+
+
+interface DataItem {
+  id: number;
+  name: string;
+}
 
  const Navbar = () => {
-  var loc= 'location';
   const [menuOpen, setMenuOpen] = useState(false);
   const handleChange = (value: string) => {
     console.log(`selected ${value}`);
   };
-  const Locations = [
-    'Bang','Mum'
-]
+
+  const [cities, setCities] = useState<DataItem[]>([]);
+  const [selectedCityId, setSelectedCityId] = useState<number | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}customer/location/getallcities`);
+        const data: DataItem[] = await response.json();
+
+        setCities(data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const handleCityChange = (value: string) => {
+    const selectedCity = cities.find((city) => city.name === value);
+    if (selectedCity) {
+      setSelectedCityId(selectedCity.id);
+      // You can now use selectedCityId in other parts of your code
+      console.log('Selected City ID:', selectedCityId);
+    }
+  };
+
+  
   
 
   return (
@@ -34,18 +63,25 @@ import {  Select } from "antd";
           />
         </div> */}
         <div className="right-0 lg:hidden">
+          
         <Select
-      defaultValue="Select Location"
-      style={{ width: 120 }}
-      onChange={handleChange}
-      options={[
-        { value: 'Bangalore', label: 'Bangalore' },
-        { value: 'Mumbai', label: 'Mumbai' },
-        { value: 'Guwahati', label: 'Guwahati' },
-        { value: 'Gurgaon', label: 'Gurgaon', disabled: true },
-      ]}
-      
-    />
+        showSearch
+        style={{ width: 200 }}
+        placeholder="Select a city"
+        optionFilterProp="children"
+        filterOption={(input, option) =>
+          (option?.children as unknown as string)
+            .toLowerCase()
+            .includes(input.toLowerCase())
+        }
+        onChange={handleCityChange}
+      >
+        {cities.map((city) => (
+          <Option key={city.id} value={city.name}>
+            {city.name}
+          </Option>
+        ))}
+      </Select>
     
         </div>
       

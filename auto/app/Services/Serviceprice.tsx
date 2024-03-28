@@ -1,33 +1,31 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Button, Col, Image, Row, notification } from 'antd';
+import { Button, Col, Row, notification } from 'antd';
 
 import axios from "axios";
 
-interface MakeItem {
-  id: number;
-  name: string;
-  // Add any other attributes you expect in the response
-}
-interface ModelItem {
+interface GetItem {
   id: number;
   name: string;
   // Add any other attributes you expect in the response
 }
 
+
 const Serviceprice: React.FC = () => {
   const [ids, setIds] = useState<number[]>([]);
-  const [data, setData] = useState<MakeItem[]>([]);
-  const [models, setModels] = useState<ModelItem[]>([]);
+  const [data, setData] = useState<GetItem[]>([]);
+  const [models, setModels] = useState<GetItem[]>([]);
   
-  const [selectedId, setSelectedId] = useState<number | null>(null);
+  const [selectedMakeId, setSelectedMakeId] = useState<number | null>(null);
+  const [selectedModelId, setSelectedModelId] = useState<number | null>(null);
+  const [selectedFuelId, setSelectedFuellId] = useState<number | null>(null);
 
   useEffect(() => {
     const fetchMake = async () => {
       try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}core/getAllMake`);
-        const fetchedData: MakeItem[] = await response.json();
+        const fetchedData: GetItem[] = await response.json();
         
 
         setData(fetchedData);
@@ -43,27 +41,88 @@ const Serviceprice: React.FC = () => {
 
   }, []);
 
-  const Makeclick2 = async (id:number)=>{
+  useEffect(() => {
+    // If the selectedMakeId is null, do nothing
+    if (selectedMakeId === null || 0) {
+      return;
+    }
+    // Calling the function to fetch the models
+    handleMakeClick(selectedMakeId);
+  }, [selectedMakeId]);
+
+  useEffect(() => {
+    // If the selectedMakeId is null, do nothing
+    if (selectedModelId === null || 0) {
+      return;
+    }
+    // Calling the function to fetch the fuel
+    console.log('Selected Model ID',selectedModelId)
+    Modelclick();
+  }, [selectedModelId]);
+
+  useEffect(() => {
+    notification.destroy();
+    // If the selectedFuelId is null, do nothing
+    if (selectedFuelId === null || 0) {
+      return;
+    }
+    console.log('Selected Fuel ID',selectedFuelId)
+   
+  }, [selectedFuelId]);
+
+  const Makeclick = async (id:number)=>{
     notification.open({
-      message: `Brand number ${id} clicked`,
+      message: `Please Select Your Model to Proceed`,
       description: (
-        
-          <ul>
-            {models.map((item, index) => (
-              <li key={index}>{item.name}</li>
-            ))}
-          </ul>
+        <ul style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
+        {models.map((model, index) => (
+          <li key={index} 
+          
+          >
+            <Button 
+            onClick={() => setSelectedModelId(model.id)}
+            >
+              {model.name.toUpperCase()}
+            </Button>
+          </li>
+        ))}
+      </ul>
           ),
       duration: 3, // Automatically close the notification after 3 seconds
     });
   };
+
+  const Modelclick = async ()=>{
+    notification.open({
+      message: `Please Select Your Fuel to Proceed`,
+      description: (
+      <ul style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
+        <li key={1}>
+           <img src="https://www.automovill.com/assets/fuel/PETROL.svg" width="80px" height="80px" 
+           onClick={() => setSelectedFuellId(1)}/>
+        </li>
+        <li key={2}>
+        <img src="https://www.automovill.com/assets/fuel/DIESEL.svg" width="80px" height="80px" 
+           onClick={() => setSelectedFuellId(2)}/>
+        </li>
+        <li key={3}>
+        <img src="https://www.automovill.com/assets/fuel/CNG.svg" width="80px" height="80px" 
+           onClick={() => setSelectedFuellId(3)}/>
+        </li>
+      
+      </ul>
+        ),
+      duration: 3, // Automatically close the notification after 3 seconds
+    });
+  };
+
   
-  const handleMakeClick = async (id2: number) => {
+  
+  const handleMakeClick = async (id: number) => {
     notification.destroy();
-    
     try {
-      const response2 = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}core/getModel?makeId=${id2}`);
-      const fetchedData2: ModelItem[] = await response2.json();
+      const response2 = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}core/getModel?makeId=${id}`);
+      const fetchedData2: GetItem[] = await response2.json();
 
       setModels(fetchedData2);
 
@@ -71,10 +130,10 @@ const Serviceprice: React.FC = () => {
         console.error('Error fetching data:', error);
       }
       
-    setSelectedId(id2);
-    console.log('Seleted brand ID',id2)
+    setSelectedMakeId(id);
+    console.log('Seleted brand ID',id)
 
-    Makeclick2(id2)
+    Makeclick(id)
 
 
   };
@@ -83,7 +142,7 @@ const Serviceprice: React.FC = () => {
 
   const handleShowIds = () => {
     notification.info({
-      message: 'Select Your Brand',
+      message: 'Please Select Your Make to Proceed',
       description: (
         <div>
         <Row gutter={[16, 16]} justify="start">

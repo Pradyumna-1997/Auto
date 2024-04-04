@@ -6,7 +6,7 @@ import "./Navbar.css";
 import Link from "next/link";
 import Hamburger from "hamburger-react";
 
-import {  Select } from "antd";
+import { Select } from "antd";
 const { Option } = Select;
 
 
@@ -18,9 +18,6 @@ interface DataItem {
 
  const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const handleChange = (value: string) => {
-    console.log(`selected ${value}`);
-  };
 
   const [cities, setCities] = useState<DataItem[]>([]);
   const [selectedCityId, setSelectedCityId] = useState<number | null>(null);
@@ -35,21 +32,44 @@ interface DataItem {
       } catch (error) {
         console.error('Error fetching data:', error);
       }
+      const cityId = sessionStorage.getItem('city');
+      if (cityId) {
+        setSelectedCityId(parseInt(cityId, 10));
+
+        // Add cityId into the URL as a query parameter
+        const url = new URL(window.location.href);
+        url.searchParams.set('city', cityId);
+        window.history.pushState({}, '', url.toString());
+      }
     };
 
     fetchData();
   }, []);
 
-  const handleCityChange = (value: string) => {
-    const selectedCity = cities.find((city) => city.name === value);
-    if (selectedCity) {
-      setSelectedCityId(selectedCity.id);
-      // You can now use selectedCityId in other parts of your code
-      console.log('Selected City ID:', selectedCityId);
+  useEffect(() => {
+    if (!selectedCityId) {
+      return;
     }
-  };
+    console.log('Selected City ID:', selectedCityId);
+  }, [selectedCityId]);
 
   
+
+  const handleCityChange = async (value: string) => {
+    const selectedCity = cities.find((city) => city.name === value);
+  if (selectedCity) {
+    setSelectedCityId(selectedCity.id);
+
+    // Add selectedCity.id into the URL as a query parameter
+    const url = new URL(window.location.href);
+    url.searchParams.set('city', selectedCity.id.toString());
+    window.history.pushState({}, '', url.toString());
+
+    // Store selectedCity.id in session storage
+    sessionStorage.setItem('city', selectedCity.id.toString());
+  };
+}
+
   
 
   return (
